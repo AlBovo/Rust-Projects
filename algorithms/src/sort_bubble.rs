@@ -1,21 +1,21 @@
 /*
-* Params : lista -> vector of i32 numbers to sort
+* Params : list -> vector of i32 numbers to sort
 * Return : vector of i32 number sorted
 */
-pub fn bubble_sort(mut lista: Vec<i32>) -> Vec<i32> {
+pub fn bubble_sort(mut list: Vec<i32>) -> Vec<i32> {
     loop{
         let mut finished = false; // variabile di lavoro
 
-        for i in 0..lista.len()-1 {
-            if lista[i] > lista[i+1] {
-                let copy = lista[i+1];
-                lista[i+1] = lista[i];
-                lista[i] = copy;
+        for i in 0..list.len()-1 {
+            if list[i] > list[i+1] { // the values must be switched
+                let copy = list[i+1];
+                list[i+1] = list[i];
+                list[i] = copy;
                 finished = true;
             }
         }
 
-        if !finished { break; }
+        if !finished { break; } // if I haven't made any change to the vector
     }
-    return lista;
+    return list;
 }

@@ -2,38 +2,38 @@
 * Params : vec of i32 values to sort
 * Return : vec of i32 sorted values
 */
-pub fn merge_sort(mut lista: Vec<i32>) -> Vec<i32> {
-    if lista.len() == 1 {
-        return lista;
+pub fn merge_sort(mut list: Vec<i32>) -> Vec<i32> {
+    if list.len() == 1 {
+        return list;
     }
 
-    let mut lista1 = lista.split_off(lista.len() / 2);
-    let mut new_lista = Vec::new();
-    lista = merge_sort(lista.clone());
-    lista1 = merge_sort(lista1.clone());
+    let mut list1 = list.split_off(list.len() / 2); // divide the list
+    let mut new_list = Vec::new();      // create a new list to return
+    list = merge_sort(list.clone());    // sort the first half of the list
+    list1 = merge_sort(list1.clone());  // sort the second half of the list
 
-    let mut point_l1 = 0;
-    let mut point_l2 = 0;
-    for _ in 0..(lista.len()+lista1.len()) {
-        if point_l1 == lista.len() {
-            new_lista.push(lista1[point_l2]);
+    let mut point_l1 = 0; // logic pointer to the first list
+    let mut point_l2 = 0; // logic pointer to the second list
+    for _ in 0..(list.len()+list1.len()) {
+        if point_l1 == list.len() {         // end of the first list
+            new_list.push(list1[point_l2]);
             point_l2 += 1;
             continue;
         }
-        else if point_l2 == lista1.len() {
-            new_lista.push(lista[point_l1]);
+        else if point_l2 == list1.len() {   // end of the second list
+            new_list.push(list[point_l1]);
             point_l1 += 1;
             continue;
         }
 
-        if lista[point_l1] < lista1[point_l2] {
-            new_lista.push(lista[point_l1]);
+        if list[point_l1] < list1[point_l2] { // first list value is better then second
+            new_list.push(list[point_l1]);
             point_l1 += 1;
         }
         else {
-            new_lista.push(lista1[point_l2]);
+            new_list.push(list1[point_l2]);
             point_l2 += 1;
         }
     }
-    return new_lista;
+    return new_list; // return sorted vec
 }
