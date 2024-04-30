@@ -2,8 +2,13 @@ use std::io;
 
 mod sort_selection;
 mod sort_bubble;
+mod sort_merge;
 
-use crate::{sort_bubble::bubble_sort, sort_selection::selection_sort};
+use crate::{
+    sort_bubble::bubble_sort, 
+    sort_selection::selection_sort,
+    sort_merge::merge_sort
+};
 
 fn main() {
     let mut lista: Vec<i32> = Vec::new();
@@ -36,14 +41,16 @@ fn main() {
         lista.push(numero);
     }
 
+    let mut lista_sorted = lista.clone(); 
+    lista_sorted.sort();
+    
     let lista_bubble = bubble_sort(lista.clone());
     let lista_selection = selection_sort(lista.clone());
+    let lista_merge = merge_sort(lista.clone());
 
-    for i in &lista_bubble {
-        print!("{} ", i);
-    }
-    print!("\n");
-    for i in &lista_selection {
-        print!("{} ", i);
-    }
+    assert_eq!(lista_sorted, lista_bubble);
+    assert_eq!(lista_sorted, lista_selection);
+    assert_eq!(lista_sorted, lista_merge);
+
+    println!("OK");
 }
